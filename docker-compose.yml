@@ -1,0 +1,21 @@
+---
+version: "3"
+services:
+  perl5_coresmokedb_web:
+    container_name: dckr-perl5-coresmokedb-web
+    image: perl5-coresmokedb-web:latest
+    build:
+      context: Perl5-CoreSmokeDB-Web
+    ports:
+      - 5555:5555
+    restart: unless-stopped
+  perl5_coresmokedb_api:
+    container_name: dckr-perl5-coresmokedb-api
+    image: perl5-coresmokedb-api:latest
+    build:
+      context: Perl5-CoreSmokeDB-API
+    ports:
+      - 5050:5050
+    environment:
+      PGPASSFILE: /var/lib/coresmokedb-api/environments/.pgpass
+    restart: unless-stopped
